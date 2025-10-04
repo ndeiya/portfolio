@@ -205,7 +205,7 @@ function App() {
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl font-bold mb-4">About Me</h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              I'm a passionate full-stack developer with 5+ years of experience creating web applications
+              I'm a passionate web and mobile developer with experience in creating mobile and web applications
               that solve real-world problems. I love turning complex problems into simple, beautiful designs.
             </p>
           </div>
