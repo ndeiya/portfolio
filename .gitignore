@@ -56,4 +56,13 @@ Icon?
 
 # Output folders
 out/
-.next/ 
+.next/ # Manus 
+deployment files
+.manus/
+manus.json
+manus.config.js
+manus.config.json
+*.manus
+deploy.sh
+deploy.js
+.deploy/
