@@ -15,6 +15,8 @@ import {
   Briefcase,
   MessageSquare,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
   Menu,
   X
 } from 'lucide-react'
@@ -23,11 +25,14 @@ import heroBackground from './assets/hero-bg.png'
 import zludeScreenshot from './assets/zlude.png'
 import dcbrainsImage from './assets/dcbrains.png'
 import project3Image from './assets/project-3.png'
+import alumasterImage from './assets/alumaster.png'
+import p2pdonateImage from './assets/p2pdonate.png'
 
 function App() {
   const [activeSection, setActiveSection] = useState('home')
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [currentProjectIndex, setCurrentProjectIndex] = useState(0)
 
   const sections = [
     { id: 'home', label: 'Home' },
@@ -72,6 +77,22 @@ function App() {
       image: project3Image,
       githubUrl: 'https://github.com/ndeiya/weather-dashboard',
       liveUrl: 'https://ndeiya.github.io/weather-dashboard'
+    },
+    {
+      title: 'AluMaster GH Project',
+      description: 'A comprehensive aluminum and glass management system for tracking inventory, orders, and customer relationships. Features real-time inventory management, order processing, and detailed reporting capabilities.',
+      tech: ['PHP', 'JavaScript', 'MySQL', 'Bootstrap'],
+      image: alumasterImage,
+      githubUrl: 'https://github.com/ndeiya/alumaster',
+      liveUrl: 'https://alumastergh.com'
+    },
+    {
+      title: 'P2P Donate',
+      description: 'A socially impactful peer-to-peer donation platform addressing betting addiction in Ghana. Features an intelligent pledging and matching system that connects donors with receivers, referral rewards, cash bonuses, and mobile money integration. Provides guaranteed returns and promotes financial literacy in the community.',
+      tech: ['PHP', 'MySQL', 'JavaScript', 'Mobile Money API'],
+      image: p2pdonateImage,
+      githubUrl: 'https://github.com/ndeiya/P2P_Donate',
+      liveUrl: 'https://p2pdonate.com'
     }
   ]
 
@@ -306,45 +327,90 @@ function App() {
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
-            {projects.map((project, index) => (
-              <Card key={project.title} className="overflow-hidden card-hover">
-                <div className="aspect-video overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                  <p className="text-muted-foreground mb-4">{project.description}</p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tech.map((tech) => (
-                      <Badge key={tech} variant="outline">{tech}</Badge>
-                    ))}
+          {/* Carousel Container */}
+          <div className="relative">
+            {/* Main Project Display */}
+            <div className="overflow-hidden">
+              <div 
+                className="flex transition-transform duration-500 ease-in-out"
+                style={{ transform: `translateX(-${currentProjectIndex * 100}%)` }}
+              >
+                {projects.map((project, index) => (
+                  <div key={project.title} className="w-full flex-shrink-0 px-4">
+                    <Card className="overflow-hidden card-hover max-w-4xl mx-auto">
+                      <div className="grid md:grid-cols-2 gap-6">
+                        <div className="aspect-video md:aspect-auto overflow-hidden">
+                          <img
+                            src={project.image}
+                            alt={project.title}
+                            className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                          />
+                        </div>
+                        <CardContent className="p-6 flex flex-col justify-center">
+                          <h3 className="text-2xl font-semibold mb-3">{project.title}</h3>
+                          <p className="text-muted-foreground mb-4">{project.description}</p>
+                          <div className="flex flex-wrap gap-2 mb-6">
+                            {project.tech.map((tech) => (
+                              <Badge key={tech} variant="outline">{tech}</Badge>
+                            ))}
+                          </div>
+                          <div className="flex space-x-2">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => window.open(project.githubUrl || '#', '_blank')}
+                            >
+                              <Github className="w-4 h-4 mr-2" />
+                              Code
+                            </Button>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => window.open(project.liveUrl || '#', '_blank')}
+                            >
+                              <ExternalLink className="w-4 h-4 mr-2" />
+                              Live Demo
+                            </Button>
+                          </div>
+                        </CardContent>
+                      </div>
+                    </Card>
                   </div>
-                  <div className="flex space-x-2">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => window.open(project.githubUrl || '#', '_blank')}
-                    >
-                      <Github className="w-4 h-4 mr-2" />
-                      Code
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => window.open(project.liveUrl || '#', '_blank')}
-                    >
-                      <ExternalLink className="w-4 h-4 mr-2" />
-                      Live Demo
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                ))}
+              </div>
+            </div>
+
+            {/* Navigation Buttons */}
+            <button
+              onClick={() => setCurrentProjectIndex((prev) => (prev === 0 ? projects.length - 1 : prev - 1))}
+              className="absolute left-0 top-1/2 -translate-y-1/2 bg-background/80 backdrop-blur-sm border border-border rounded-full p-3 hover:bg-primary hover:text-primary-foreground transition-all duration-300 shadow-lg"
+              aria-label="Previous project"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+            <button
+              onClick={() => setCurrentProjectIndex((prev) => (prev === projects.length - 1 ? 0 : prev + 1))}
+              className="absolute right-0 top-1/2 -translate-y-1/2 bg-background/80 backdrop-blur-sm border border-border rounded-full p-3 hover:bg-primary hover:text-primary-foreground transition-all duration-300 shadow-lg"
+              aria-label="Next project"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+
+            {/* Dots Indicator */}
+            <div className="flex justify-center gap-2 mt-8">
+              {projects.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentProjectIndex(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    index === currentProjectIndex 
+                      ? 'bg-primary w-8' 
+                      : 'bg-muted-foreground/30 hover:bg-muted-foreground/50'
+                  }`}
+                  aria-label={`Go to project ${index + 1}`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
