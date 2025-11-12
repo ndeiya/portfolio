@@ -21,10 +21,10 @@ import {
   X
 } from 'lucide-react'
 import './App.css'
-import heroBackground from './assets/hero-bg.png'
+import heroBackground from './assets/hero-bg.webp'
 import zludeScreenshot from './assets/zlude.png'
 import dcbrainsImage from './assets/dcbrains.png'
-import project3Image from './assets/project-3.png'
+import project3Image from './assets/project-3.webp'
 import alumasterImage from './assets/alumaster.png'
 import p2pdonateImage from './assets/p2pdonate.png'
 
@@ -343,6 +343,7 @@ function App() {
                           <img
                             src={project.image}
                             alt={project.title}
+                            loading="lazy"
                             className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                           />
                         </div>
