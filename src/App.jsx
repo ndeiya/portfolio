@@ -27,6 +27,7 @@ import dcbrainsImage from './assets/dcbrains.png'
 import project3Image from './assets/project-3.webp'
 import alumasterImage from './assets/alumaster.png'
 import p2pdonateImage from './assets/p2pdonate.png'
+import logo from './assets/logo-webdev.png'
 
 function App() {
   const [activeSection, setActiveSection] = useState('home')
@@ -121,8 +122,11 @@ function App() {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div className={`text-xl font-bold transition-colors duration-300 ${isScrolled ? 'text-foreground' : 'text-white'}`}>
-              Abdul Ndeiya
+            <div className="flex items-center gap-3">
+              <img src={logo} alt="Abdul Ndeiya Logo" className="h-10 w-10 object-contain" />
+              <span className={`text-xl font-bold transition-colors duration-300 ${isScrolled ? 'text-foreground' : 'text-white'}`}>
+                Abdul Ndeiya
+              </span>
             </div>
 
             {/* Desktop Navigation */}
