@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import SEO from './components/SEO.jsx'
 import { Button } from './components/ui/button.jsx'
 import { Card, CardContent } from './components/ui/card.jsx'
 import { Badge } from './components/ui/badge.jsx'
@@ -118,6 +119,12 @@ function App() {
 
   return (
     <div className="min-h-screen bg-background text-foreground dark">
+      <SEO 
+        title='Abdul Ndeiya - Web and Mobile Developer Portfolio'
+        description='Professional Web and Mobile Developer crafting beautiful, functional, and user-centered digital experiences. Specializing in React, React Native, PHP, and modern web technologies.'
+        name='Abdul Ndeiya'
+        type='website'
+      />
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
