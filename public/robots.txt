@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ndeiya.com/sitemap.xml
+Sitemap: https://ndeiya.online/sitemap.xml
