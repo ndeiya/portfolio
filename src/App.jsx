@@ -28,6 +28,7 @@ import dcbrainsImage from './assets/dcbrains.png'
 import project3Image from './assets/project-3.webp'
 import alumasterImage from './assets/alumaster.png'
 import p2pdonateImage from './assets/p2pdonate.png'
+import kingatesImage from './assets/kingates.png'
 import logo from './assets/logo-webdev.png'
 
 function App() {
@@ -56,6 +57,14 @@ function App() {
   ]
 
   const projects = [
+    {
+      title: 'Kingates Automotive Systems',
+      description: 'A comprehensive vehicle service and workforce management solution developed for Kingates, a leading automotive company in Singapore. The system streamlines customer bookings, manages complex job cards, and optimizes workforce operations through intelligent technician assignment and automated payroll processing.',
+      tech: ['PHP', 'MySQL', 'JavaScript', 'Bootstrap'],
+      image: kingatesImage,
+      githubUrl: 'https://github.com/ndeiya/kingates',
+      liveUrl: 'https://kingates.com'
+    },
     {
       title: 'Zlude Mobile App Project',
       description: 'A dynamic website showcasing the Zlude Mobile App with real-time currency conversion functionality. Features secure money transfers, live exchange rates, and an intuitive dashboard for seamless international transactions.',
@@ -119,7 +128,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-background text-foreground dark">
-      <SEO 
+      <SEO
         title='Abdul Ndeiya - Web and Mobile Developer Portfolio'
         description='Professional Web and Mobile Developer crafting beautiful, functional, and user-centered digital experiences. Specializing in React, React Native, PHP, and modern web technologies.'
         name='Abdul Ndeiya'
@@ -342,7 +351,7 @@ function App() {
           <div className="relative">
             {/* Main Project Display */}
             <div className="overflow-hidden">
-              <div 
+              <div
                 className="flex transition-transform duration-500 ease-in-out"
                 style={{ transform: `translateX(-${currentProjectIndex * 100}%)` }}
               >
@@ -414,11 +423,10 @@ function App() {
                 <button
                   key={index}
                   onClick={() => setCurrentProjectIndex(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    index === currentProjectIndex 
-                      ? 'bg-primary w-8' 
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentProjectIndex
+                      ? 'bg-primary w-8'
                       : 'bg-muted-foreground/30 hover:bg-muted-foreground/50'
-                  }`}
+                    }`}
                   aria-label={`Go to project ${index + 1}`}
                 />
               ))}
