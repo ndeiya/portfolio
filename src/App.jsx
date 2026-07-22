@@ -271,9 +271,6 @@ function App() {
           <div className="hero-orb hero-orb-two" aria-hidden="true" />
 
           <div className="hero-copy" data-reveal>
-            <div className="availability-pill">
-              <span className="pulse-dot" /> Available for selected projects
-            </div>
             <h1>
               I build digital products that <em>move business forward.</em>
             </h1>

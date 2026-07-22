@@ -286,34 +286,6 @@ button {
   z-index: 2;
 }
 
-.availability-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  margin-bottom: 28px;
-  padding: 8px 12px;
-  color: var(--ink-soft);
-  background: var(--surface-raised);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 680;
-  letter-spacing: 0.02em;
-}
-
-.pulse-dot {
-  width: 7px;
-  height: 7px;
-  background: var(--lime);
-  border-radius: 50%;
-  box-shadow: 0 0 0 5px rgba(200, 255, 74, 0.11);
-  animation: pulse 2.4s infinite;
-}
-
-@keyframes pulse {
-  50% { box-shadow: 0 0 0 8px rgba(200, 255, 74, 0); }
-}
-
 .hero h1,
 .section-heading h2,
 .about-intro h2,
