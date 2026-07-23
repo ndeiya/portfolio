@@ -300,6 +300,11 @@ button {
 .hero h1 {
   max-width: 760px;
   font-size: clamp(58px, 7.1vw, 112px);
+  text-wrap: balance;
+}
+
+.hero-line {
+  display: block;
 }
 
 .hero h1 em,
@@ -1359,50 +1364,53 @@ textarea:focus-visible {
   }
 
   .hero {
+    gap: 0;
+    padding-top: 118px;
+    padding-bottom: 82px;
     padding-right: 20px;
     padding-left: 20px;
   }
 
   .hero h1 {
-    font-size: clamp(50px, 15vw, 72px);
+    max-width: 100%;
+    font-size: clamp(43px, 11.7vw, 54px);
+    line-height: 0.93;
+    letter-spacing: -0.058em;
   }
 
   .hero-lede {
-    font-size: 17px;
+    max-width: 34rem;
+    margin-top: 22px;
+    font-size: 16px;
+    line-height: 1.55;
   }
 
   .hero-actions {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 12px;
+    align-items: center;
+    flex-flow: row wrap;
+    gap: 14px 22px;
+    margin-top: 30px;
   }
 
   .hero-showcase {
-    min-height: 380px;
-    margin-top: 20px;
+    width: calc(100% + 12px);
+    min-height: 270px;
+    margin: 42px -6px 0;
   }
 
   .showcase-main {
-    top: 55px;
-    width: 95%;
+    top: 0;
+    width: 94%;
   }
 
   .showcase-secondary {
-    bottom: 8px;
-    width: 64%;
+    bottom: 0;
+    width: 56%;
   }
 
+  .showcase-label,
   .showcase-chip {
-    padding: 7px 10px;
-    font-size: 10px;
-  }
-
-  .chip-build {
-    top: 49%;
-  }
-
-  .showcase-label {
-    right: 0;
+    display: none;
   }
 
   .hero-disciplines {

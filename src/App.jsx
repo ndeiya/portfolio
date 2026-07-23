@@ -272,7 +272,9 @@ function App() {
 
           <div className="hero-copy" data-reveal>
             <h1>
-              I build digital products that <em>move business forward.</em>
+              <span className="hero-line">I build digital</span>
+              <span className="hero-line">products that move</span>
+              <em className="hero-line">businesses forward.</em>
             </h1>
             <p className="hero-lede">
               Web platforms, mobile apps, AI integrations and automations, shaped from strategy to launch.
