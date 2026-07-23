@@ -1267,6 +1267,18 @@ textarea:focus-visible {
     max-width: 780px;
   }
 
+  .hero-actions {
+    width: 100%;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .hero-actions > a {
+    margin-inline: auto;
+  }
+
   .hero-showcase {
     width: min(100%, 690px);
     min-height: 540px;
@@ -1386,12 +1398,8 @@ textarea:focus-visible {
   }
 
   .hero-actions {
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
     gap: 16px;
     margin-top: 30px;
-    text-align: center;
   }
 
   .hero-showcase {
