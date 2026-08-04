@@ -250,7 +250,7 @@ function HomePage({ theme, setTheme }) {
       <section className="hero">
         <div className="grid-bg" /><div className="orb orb-one" /><div className="orb orb-two" />
         <div className="hero-copy">
-          <span className="kicker"><i /> PRODUCT DEVELOPER · GHANA</span>
+          
           <h1>Engineering <em>useful</em> digital products.</h1>
           <p>I design and build web platforms, native mobile apps, AI integrations and automations that solve real business problems.</p>
           <div className="actions"><a className="primary-btn" href="/work">Explore selected work <ArrowRight size={18} /></a><a className="secondary-link" href="/contact">Tell me what you’re building <ArrowUpRight size={18} /></a></div>
@@ -326,7 +326,7 @@ function ContactPage({ theme, setTheme }) {
     <Shell theme={theme} setTheme={setTheme}>
       <Meta title="Contact | Abdul Ndeiya" description="Start a web, mobile, AI or automation project with Abdul Ndeiya." />
       <section className="contact-page">
-        <div className="contact-copy"><span className="kicker">START A CONVERSATION</span><h1>Have a useful idea? <em>Let’s build it.</em></h1><p>Share the problem, the goal and where you are right now. I’ll help you identify the most practical next step.</p><div className="contact-methods"><a href="mailto:ndeiya.dev@gmail.com"><Mail /> <span><small>EMAIL</small>ndeiya.dev@gmail.com</span></a><a href="https://wa.me/233247439206" target="_blank" rel="noreferrer"><MessageCircle /> <span><small>WHATSAPP</small>Start a chat</span></a></div><div className="location"><i /> Based in Ghana · Working globally</div></div>
+        <div className="contact-copy"><h1>Have a useful idea? <em>Let’s build it.</em></h1><p>Share the problem, the goal and where you are right now. I’ll help you identify the most practical next step.</p><div className="contact-methods"><a href="mailto:ndeiya.dev@gmail.com"><Mail /> <span><small>EMAIL</small>ndeiya.dev@gmail.com</span></a><a href="https://wa.me/233247439206" target="_blank" rel="noreferrer"><MessageCircle /> <span><small>WHATSAPP</small>Start a chat</span></a></div></div>
         <form className="contact-form" onSubmit={submit}><div className="terminal-label"><i /><i /><i /><span>NEW_PROJECT_ENQUIRY</span></div><div className="form-row"><label>Your name<input name="name" required autoComplete="name" placeholder="Name" /></label><label>Company <small>optional</small><input name="company" autoComplete="organization" placeholder="Company or organisation" /></label></div><label>What do you need?<select name="type" defaultValue="" required><option value="" disabled>Select a project type</option><option>Website or web platform</option><option>Native mobile application</option><option>AI integration</option><option>Business automation</option><option>Something else</option></select></label><label>Tell me about the project<textarea name="details" rows="6" required placeholder="What should it do, who is it for, and when would you like to launch?" /></label><button className="primary-btn" type="submit">Prepare enquiry <ArrowUpRight size={18} /></button><p className="form-note">This opens your email app with the details ready to send.</p></form>
       </section>
     </Shell>
