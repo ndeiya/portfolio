@@ -139,6 +139,13 @@ h1 em, h2 em { color: var(--cyan); font-style: normal; }
 .stack { margin-top: 25px; padding-top: 16px; color: var(--muted); border-top: 1px solid var(--line); font-family: 'IBM Plex Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: .05em; }
 .inline-link { width: max-content; margin-top: 23px; }
 
+.project-screenshot { position: relative; z-index: 2; width: min(100%, 760px); overflow: hidden; background: #eef2f4; border: 1px solid rgba(255,255,255,.2); border-radius: 13px; box-shadow: 0 30px 75px rgba(0,0,0,.35); transform: perspective(1000px) rotateX(1deg) rotateY(-2deg); }
+.project-screenshot.compact { width: min(100%, 620px); transform: none; }
+.project-screenshot img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: center top; }
+.screenshot-bar { display: flex; height: 34px; align-items: center; gap: 6px; padding: 0 11px; color: #71808c; background: #dfe5e9; font-family: 'IBM Plex Mono', monospace; font-size: 7px; text-transform: uppercase; letter-spacing: .08em; }
+.screenshot-bar i { width: 7px; height: 7px; background: #aeb9c0; border-radius: 50%; }
+.screenshot-bar span { margin-left: 6px; }
+
 .device-stage { position: relative; z-index: 2; width: min(100%, 560px); height: 510px; }
 .device-stage.compact { height: 260px; transform: scale(.78); }
 .phone { position: absolute; width: 230px; height: 470px; padding: 10px; background: #080d16; border: 1px solid rgba(255,255,255,.23); border-radius: 38px; box-shadow: 0 30px 70px rgba(0,0,0,.42); }
