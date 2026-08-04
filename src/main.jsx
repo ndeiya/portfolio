@@ -6,8 +6,6 @@ import './App.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <HelmetProvider>
-      <App />
-    </HelmetProvider>
+    <HelmetProvider><App /></HelmetProvider>
   </React.StrictMode>,
 )
