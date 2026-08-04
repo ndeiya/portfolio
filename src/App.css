@@ -245,6 +245,18 @@ h1 em, h2 em { color: var(--cyan); font-style: normal; }
 .back-link { display: inline-flex; margin-bottom: 45px; color: var(--muted); font-family: 'IBM Plex Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: .08em; }
 .case-copy h1 { margin: 22px 0; font-size: clamp(52px, 6vw, 86px); line-height: .96; letter-spacing: -.07em; }
 .case-copy > p { max-width: 650px; color: var(--muted); font-size: 17px; }
+.case-hero .project-screenshot { width: min(100%, 660px); transform: none; }
+.case-hero .project-screenshot img { aspect-ratio: 16 / 11; }
+.case-gallery { padding: 105px max(24px, calc((100vw - var(--max)) / 2)); background: var(--bg); border-bottom: 1px solid var(--line); }
+.case-gallery-heading { display: flex; align-items: end; justify-content: space-between; gap: 30px; margin-bottom: 38px; }
+.case-gallery-heading h2 { margin: 0; font-size: clamp(38px, 4.5vw, 64px); line-height: 1; letter-spacing: -.06em; }
+.case-gallery-grid { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(260px, .55fr); gap: 18px; align-items: stretch; }
+.case-shot { margin: 0; overflow: hidden; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--shadow); }
+.case-shot img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.case-shot.landscape img { aspect-ratio: 16 / 9; }
+.case-shot.portrait img { aspect-ratio: 9 / 16; }
+.case-gallery.annapro .case-gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.case-gallery.annapro .case-shot img { aspect-ratio: 9 / 15; object-fit: cover; object-position: top center; }
 .case-body { display: grid; grid-template-columns: .35fr 1fr; gap: clamp(55px, 9vw, 140px); }
 .case-nav { position: sticky; top: 115px; height: max-content; }
 .case-nav > span, .case-content article > span { color: var(--cyan); font-family: 'IBM Plex Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: .12em; }
@@ -298,6 +310,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   .service-detail { gap: 35px; padding: 28px 20px; }.terminal-label { margin: -28px -20px 28px; }.service-points { grid-template-columns: 1fr; }
   .contact-page { gap: 50px; padding: 125px 20px 70px; }.contact-copy h1 { font-size: 55px; }.form-row { grid-template-columns: 1fr; }.contact-form { padding: 28px 20px; }.contact-form .terminal-label { margin: -28px -20px 25px; }
   .case-hero { gap: 25px; min-height: auto; padding: 125px 20px 65px; }.case-copy h1 { font-size: 51px; }.case-hero .device-stage { transform: scale(.72); }
+  .case-gallery { padding: 75px 20px; }.case-gallery-heading { align-items: start; flex-direction: column; }.case-gallery-grid, .case-gallery.annapro .case-gallery-grid { grid-template-columns: 1fr; }.case-shot.portrait { max-width: 520px; margin: 0 auto; }
   .case-body { grid-template-columns: 1fr; gap: 50px; }.case-nav { position: static; }.case-content { gap: 65px; }.case-content ul { grid-template-columns: 1fr; }
   .footer { grid-template-columns: 1fr; justify-items: center; padding: 35px 20px; }.copyright { justify-self: center; }.footer-links { flex-wrap: wrap; justify-content: center; }
 }

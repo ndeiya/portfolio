@@ -24,6 +24,10 @@ import weatherImage from './assets/project-3.webp'
 import alumasterImage from './assets/alumaster.png'
 import kingatesImage from './assets/kingates.png'
 import zeetacardImage from './assets/zeetacard.png'
+import tracostCover from './assets/tracost-cover.webp'
+import tracostDashboard from './assets/tracost-dashboard.webp'
+import annaproTerminal from './assets/annapro-terminal.webp'
+import annaproAnalytics from './assets/annapro-analytics.webp'
 
 const projects = [
   {
@@ -37,6 +41,8 @@ const projects = [
     link: '/work/tracost',
     linkLabel: 'View case study',
     kind: 'tracost',
+    image: tracostCover,
+    imagePosition: 'center center',
     featured: true,
   },
   {
@@ -50,6 +56,8 @@ const projects = [
     link: '/work/annapro',
     linkLabel: 'View case study',
     kind: 'annapro',
+    image: annaproTerminal,
+    imagePosition: 'center top',
     featured: true,
   },
   {
@@ -104,6 +112,12 @@ const services = [
 const caseStudies = {
   tracost: {
     title: 'Tracost', eyebrow: 'Native mobile product · 2026', kind: 'tracost',
+    cover: tracostCover,
+    coverPosition: 'center center',
+    images: [
+      { src: tracostCover, alt: 'Tracost product suite for construction cost control', orientation: 'landscape' },
+      { src: tracostDashboard, alt: 'Tracost mobile dashboard showing project funds and expenses', orientation: 'portrait' },
+    ],
     headline: 'Cost control that travels with the construction team.',
     summary: 'Tracost was shaped for the reality of active construction projects: funds move between people, expenses happen on site, and managers need trustworthy reports without chasing spreadsheets.',
     challenge: 'Construction cost data was fragmented across transfers, receipts, site expenses and manual reports. The product needed to make every movement visible while remaining fast enough for daily field use.',
@@ -113,6 +127,12 @@ const caseStudies = {
   },
   annapro: {
     title: 'AnnaPro', eyebrow: 'Native mobile product · AI intelligence', kind: 'annapro',
+    cover: annaproTerminal,
+    coverPosition: 'center top',
+    images: [
+      { src: annaproTerminal, alt: 'AnnaPro terminal showing a structured match analysis', orientation: 'portrait' },
+      { src: annaproAnalytics, alt: 'AnnaPro analytics dashboard showing model and activity metrics', orientation: 'portrait' },
+    ],
     headline: 'Complex sports data, turned into a focused mobile experience.',
     summary: 'AnnaPro explores how an AI-assisted product can organise large amounts of sports information into a fast, readable interface designed for clear analysis.',
     challenge: 'Raw match data, model outputs and historical context can quickly overwhelm a small screen. The interface needed a strong hierarchy and a dependable way to present confidence, context and system status.',
@@ -317,7 +337,13 @@ function CaseStudyPage({ study, theme, setTheme }) {
   return (
     <Shell theme={theme} setTheme={setTheme}>
       <Meta title={`${study.title} Case Study | Abdul Ndeiya`} description={study.summary} />
-      <section className="case-hero"><div className="case-copy"><a className="back-link" href="/work">← All projects</a><span className="kicker">{study.eyebrow}</span><h1>{study.headline}</h1><p>{study.summary}</p></div><Mockup kind={study.kind} /></section>
+      <section className="case-hero"><div className="case-copy"><a className="back-link" href="/work">← All projects</a><span className="kicker">{study.eyebrow}</span><h1>{study.headline}</h1><p>{study.summary}</p></div><Mockup kind={study.kind} image={study.cover} title={study.title} imagePosition={study.coverPosition} /></section>
+      <section className={`case-gallery ${study.kind}`} aria-label={`${study.title} product screens`}>
+        <div className="case-gallery-heading"><span className="kicker">PRODUCT SCREENS</span><h2>The product in use.</h2></div>
+        <div className="case-gallery-grid">
+          {study.images.map((image) => <figure className={`case-shot ${image.orientation}`} key={image.src}><img src={image.src} alt={image.alt} loading="lazy" /></figure>)}
+        </div>
+      </section>
       <section className="section case-body"><div className="case-nav"><span>PROJECT OVERVIEW</span><div><a href="#challenge">01 Challenge</a><a href="#solution">02 Solution</a><a href="#outcome">03 Outcome</a></div></div><div className="case-content"><article id="challenge"><span>01 / CHALLENGE</span><h2>A practical problem, not a design exercise.</h2><p>{study.challenge}</p></article><article id="solution"><span>02 / SOLUTION</span><h2>A system shaped around the real workflow.</h2><p>{study.solution}</p></article><article id="outcome"><span>03 / OUTCOME</span><h2>One clear product foundation.</h2><ul>{study.outcomes.map((item) => <li key={item}><Check />{item}</li>)}</ul></article><article><span>TECHNOLOGY</span><div className="stack-cloud">{study.stack.map((item) => <span key={item}>{item}</span>)}</div></article></div></section>
       <section className="next-project"><span>NEXT PROJECT</span><h2>{study.kind === 'tracost' ? 'AnnaPro' : 'Kingates Automotive'}</h2><a className="primary-btn" href={study.kind === 'tracost' ? '/work/annapro' : 'https://kingates.com'}>Explore project <ArrowRight size={18} /></a></section>
     </Shell>
