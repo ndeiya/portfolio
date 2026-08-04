@@ -18,6 +18,12 @@ import {
   Workflow,
   X,
 } from 'lucide-react'
+import zludeImage from './assets/zlude.png'
+import dcbrainsImage from './assets/dcbrains.png'
+import weatherImage from './assets/project-3.webp'
+import alumasterImage from './assets/alumaster.png'
+import kingatesImage from './assets/kingates.png'
+import zeetacardImage from './assets/zeetacard.png'
 
 const projects = [
   {
@@ -57,32 +63,34 @@ const projects = [
     link: 'https://kingates.com',
     linkLabel: 'Visit live project',
     kind: 'kingates',
+    image: kingatesImage,
+    imagePosition: 'center top',
     featured: true,
   },
   {
     slug: 'zeeta', title: 'Zeeta Global', type: 'Discount platform',
     summary: 'A verified digital discount card connecting workers and students with useful everyday savings.',
-    link: 'https://zeetacard.com', kind: 'zeeta',
+    link: 'https://zeetacard.com', kind: 'zeeta', image: zeetacardImage,
   },
   {
     slug: 'zlude', title: 'Zlude', type: 'Fintech experience',
     summary: 'International transfers, live currency conversion and account management in one polished experience.',
-    link: 'https://zlude.com', kind: 'zlude',
+    link: 'https://zlude.com', kind: 'zlude', image: zludeImage,
   },
   {
     slug: 'dcbrains', title: 'DC Brains', type: 'Education platform',
     summary: 'A digital learning platform designed to make structured academic support easier to access.',
-    link: 'https://dcbrains.com', kind: 'dcbrains',
+    link: 'https://dcbrains.com', kind: 'dcbrains', image: dcbrainsImage,
   },
   {
     slug: 'alumaster', title: 'AluMaster GH', type: 'Inventory and operations',
     summary: 'A practical internal system for managing inventory, customers and day-to-day operations.',
-    link: 'https://alumastergh.com', kind: 'alumaster',
+    link: 'https://alumastergh.com', kind: 'alumaster', image: alumasterImage,
   },
   {
     slug: 'weather', title: 'Weather Dashboard', type: 'Data visualisation',
     summary: 'A responsive weather interface that turns live forecast data into a clear daily view.',
-    link: 'https://ndeiya.github.io/weather-dashboard', kind: 'weather',
+    link: 'https://ndeiya.github.io/weather-dashboard', kind: 'weather', image: weatherImage,
   },
 ]
 
@@ -167,7 +175,15 @@ function Shell({ children, theme, setTheme }) {
   return <div className="shell"><Header theme={theme} setTheme={setTheme} /><main>{children}</main><Footer /></div>
 }
 
-function Mockup({ kind, compact = false }) {
+function Mockup({ kind, compact = false, image, title, imagePosition = 'center top' }) {
+  if (image) {
+    return (
+      <div className={`project-screenshot ${compact ? 'compact' : ''}`}>
+        <div className="screenshot-bar"><i /><i /><i /><span>Live product</span></div>
+        <img src={image} alt={`${title} interface`} loading="lazy" style={{ objectPosition: imagePosition }} />
+      </div>
+    )
+  }
   const isPhone = kind === 'tracost' || kind === 'annapro'
   if (isPhone) {
     return (
@@ -193,7 +209,7 @@ function ProjectLink({ project, className = '' }) {
 function ProjectCard({ project, large = false }) {
   return (
     <article className={large ? 'project-card large' : 'project-card'}>
-      <div className="project-art"><Mockup kind={project.kind} compact={!large} /></div>
+      <div className="project-art"><Mockup kind={project.kind} compact={!large} image={project.image} title={project.title} imagePosition={project.imagePosition} /></div>
       <div className="project-info">
         {large && <span className="project-number">PROJECT_{project.number}</span>}
         <span className="eyebrow">{project.type}</span>
