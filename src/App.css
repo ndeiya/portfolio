@@ -282,6 +282,54 @@ h1 em, h2 em { color: var(--cyan); font-style: normal; }
 
 a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
 
+.floating-whatsapp {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 95;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--cyan);
+  color: #06111f;
+  box-shadow: 0 10px 28px color-mix(in srgb, var(--cyan) 40%, transparent), var(--shadow);
+  transition: transform .25s ease, box-shadow .25s ease;
+  backdrop-filter: blur(12px);
+}
+.floating-whatsapp:hover {
+  transform: translateY(-3px) scale(1.06);
+  box-shadow: 0 14px 34px color-mix(in srgb, var(--cyan) 55%, transparent), var(--shadow);
+}
+.floating-whatsapp:active {
+  transform: translateY(0) scale(.98);
+}
+.floating-whatsapp-tooltip {
+  position: absolute;
+  right: calc(100% + 12px);
+  white-space: nowrap;
+  padding: 6px 12px;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .02em;
+  box-shadow: var(--shadow);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(6px);
+  transition: opacity .2s ease, transform .2s ease;
+}
+.floating-whatsapp:hover .floating-whatsapp-tooltip {
+  opacity: 1;
+  transform: translateX(0);
+}
+
 @media (max-width: 1050px) {
   .hero { grid-template-columns: 1fr; padding-top: 145px; padding-bottom: 110px; }
   .hero-copy { max-width: 850px; }.hero-console { width: min(100%, 760px); margin: 0 auto; transform: none; }
@@ -312,6 +360,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   .case-gallery { padding: 75px 20px; }.case-gallery-heading { align-items: start; flex-direction: column; }.case-gallery-grid, .case-gallery.annapro .case-gallery-grid { grid-template-columns: 1fr; }.case-shot.portrait { max-width: 520px; margin: 0 auto; }
   .case-body { grid-template-columns: 1fr; gap: 50px; }.case-nav { position: static; }.case-content { gap: 65px; }.case-content ul { grid-template-columns: 1fr; }
   .footer { grid-template-columns: 1fr; justify-items: center; padding: 35px 20px; }.copyright { justify-self: center; }.footer-links { flex-wrap: wrap; justify-content: center; }
+  .floating-whatsapp { bottom: 20px; right: 20px; width: 48px; height: 48px; }
+  .floating-whatsapp-tooltip { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

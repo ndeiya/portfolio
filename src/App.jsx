@@ -155,16 +155,29 @@ function Meta({ title = 'Abdul Ndeiya | Product Developer', description = 'Web p
   return <Helmet><title>{title}</title><meta name="description" content={description} /></Helmet>
 }
 
-function Header({ theme, setTheme }) {
+export function normalizePath(pathname = '/') {
+  const cleaned = pathname.replace(/\/+$/, '') || '/'
+  if (cleaned === '/portfolio') return '/'
+  if (cleaned.startsWith('/portfolio/')) return cleaned.slice('/portfolio'.length) || '/'
+  return cleaned
+}
+
+export function getHref(url) {
+  if (!url || typeof url !== 'string' || !url.startsWith('/') || url.startsWith('//')) return url
+  const isPortfolio = typeof window !== 'undefined' && (window.location.pathname === '/portfolio' || window.location.pathname.startsWith('/portfolio/'))
+  return isPortfolio ? `/portfolio${url}` : url
+}
+
+function Header({ theme, setTheme, currentPath }) {
   const [open, setOpen] = useState(false)
-  const path = window.location.pathname
+  const path = normalizePath(currentPath || window.location.pathname)
   const links = [['/', 'Home'], ['/work', 'Work'], ['/services', 'Services'], ['/contact', 'Contact']]
   return (
     <header className="site-header">
-      <a className="brand" href="/" aria-label="Abdul Ndeiya home"><span className="brand-glyph">AN</span><span>Abdul Ndeiya</span></a>
+      <a className="brand" href={getHref('/')} aria-label="Abdul Ndeiya home"><span className="brand-glyph">AN</span><span>Abdul Ndeiya</span></a>
       <nav className={open ? 'nav open' : 'nav'} aria-label="Primary navigation">
-        {links.map(([href, label]) => <a key={href} className={path === href || (href !== '/' && path.startsWith(href)) ? 'active' : ''} href={href}>{label}</a>)}
-        <a className="nav-cta" href="/contact">Start a project <ArrowUpRight size={15} /></a>
+        {links.map(([href, label]) => <a key={href} className={path === href || (href !== '/' && path.startsWith(href)) ? 'active' : ''} href={getHref(href)} onClick={() => setOpen(false)}>{label}</a>)}
+        <a className="nav-cta" href={getHref('/contact')} onClick={() => setOpen(false)}>Start a project <ArrowUpRight size={15} /></a>
       </nav>
       <div className="header-tools">
         <button className="icon-btn" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} aria-label={`Use ${theme === 'dark' ? 'light' : 'dark'} theme`}>
@@ -179,7 +192,7 @@ function Header({ theme, setTheme }) {
 function Footer() {
   return (
     <footer className="footer">
-      <a className="brand" href="/"><span className="brand-glyph">AN</span><span>Abdul Ndeiya</span></a>
+      <a className="brand" href={getHref('/')}><span className="brand-glyph">AN</span><span>Abdul Ndeiya</span></a>
       <div className="footer-links">
         <a href="https://github.com/ndeiya" target="_blank" rel="noreferrer"><Github size={16} /> GitHub</a>
         <a href="https://www.linkedin.com/in/abdul-rahaman-abdulai-ndeiya-0b22a599/" target="_blank" rel="noreferrer"><Linkedin size={16} /> LinkedIn</a>
@@ -192,7 +205,23 @@ function Footer() {
 
 function Shell({ children, theme, setTheme }) {
   useEffect(() => { window.scrollTo(0, 0) }, [])
-  return <div className="shell"><Header theme={theme} setTheme={setTheme} /><main>{children}</main><Footer /></div>
+  return (
+    <div className="shell">
+      <Header theme={theme} setTheme={setTheme} />
+      <main>{children}</main>
+      <Footer />
+      <a
+        className="floating-whatsapp"
+        href="https://wa.me/233247439206"
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Chat on WhatsApp"
+      >
+        <MessageCircle size={24} />
+        <span className="floating-whatsapp-tooltip">Chat on WhatsApp</span>
+      </a>
+    </div>
+  )
 }
 
 function Mockup({ kind, compact = false, image, title, imagePosition = 'center top' }) {
@@ -223,7 +252,8 @@ function Mockup({ kind, compact = false, image, title, imagePosition = 'center t
 
 function ProjectLink({ project, className = '' }) {
   const external = project.link.startsWith('http')
-  return <a className={className} href={project.link} {...(external ? { target: '_blank', rel: 'noreferrer' } : {})}>{project.linkLabel || 'Visit live project'} <ArrowUpRight size={17} /></a>
+  const href = external ? project.link : getHref(project.link)
+  return <a className={className} href={href} {...(external ? { target: '_blank', rel: 'noreferrer' } : {})}>{project.linkLabel || 'Visit live project'} <ArrowUpRight size={17} /></a>
 }
 
 function ProjectCard({ project, large = false }) {
@@ -253,7 +283,7 @@ function HomePage({ theme, setTheme }) {
           
           <h1>Engineering <em>useful</em> digital products.</h1>
           <p>I design and build web platforms, native mobile apps, AI integrations and automations that solve real business problems.</p>
-          <div className="actions"><a className="primary-btn" href="/work">Explore selected work <ArrowRight size={18} /></a><a className="secondary-link" href="/contact">Tell me what you’re building <ArrowUpRight size={18} /></a></div>
+          <div className="actions"><a className="primary-btn" href="https://wa.me/233247439206" target="_blank" rel="noreferrer">Let’s chat <ArrowUpRight size={18} /></a><a className="secondary-link" href={getHref('/work')}>Explore selected work <ArrowRight size={18} /></a></div>
         </div>
         <div className="hero-console">
           <div className="console-top"><span /><span /><span /><b>abdul@portfolio ~ /current-work</b></div>
@@ -263,14 +293,14 @@ function HomePage({ theme, setTheme }) {
       </section>
 
       <section className="section home-work">
-        <div className="section-head"><div><span className="kicker">SELECTED WORK</span><h2>Products built for the real world.</h2></div><a className="secondary-link" href="/work">View all work <ArrowRight size={17} /></a></div>
+        <div className="section-head"><div><span className="kicker">SELECTED WORK</span><h2>Products built for the real world.</h2></div><a className="secondary-link" href={getHref('/work')}>View all work <ArrowRight size={17} /></a></div>
         <div className="featured-list">{featured.map((project) => <ProjectCard key={project.slug} project={project} large />)}</div>
       </section>
 
       <section className="section service-preview">
         <div className="section-head"><div><span className="kicker">CORE CAPABILITIES</span><h2>One partner from idea to launch.</h2></div><p>Product thinking, interface design and engineering brought into one focused process.</p></div>
         <div className="service-grid">{services.map((service) => { const Icon = service.icon; return <article className="service-mini" key={service.title}><span>{service.number}</span><Icon /><h3>{service.title}</h3><p>{service.intro}</p></article> })}</div>
-        <a className="primary-btn centered-btn" href="/services">Explore services <ArrowRight size={18} /></a>
+        <a className="primary-btn centered-btn" href={getHref('/services')}>Explore services <ArrowRight size={18} /></a>
       </section>
 
       <ContactBanner />
@@ -311,7 +341,7 @@ function ServicesPage({ theme, setTheme }) {
 }
 
 function ContactBanner() {
-  return <section className="contact-banner"><div><span className="kicker">HAVE A PROJECT?</span><h2>Let’s turn the useful idea into a real product.</h2><p>Tell me what you want to build, improve or automate. I’ll respond with the clearest next step.</p></div><a className="primary-btn" href="/contact">Start a conversation <ArrowUpRight size={18} /></a></section>
+  return <section className="contact-banner"><div><span className="kicker">HAVE A PROJECT?</span><h2>Let’s turn the useful idea into a real product.</h2><p>Tell me what you want to build, improve or automate. I’ll respond with the clearest next step.</p></div><a className="primary-btn" href={getHref('/contact')}>Start a conversation <ArrowUpRight size={18} /></a></section>
 }
 
 function ContactPage({ theme, setTheme }) {
@@ -337,7 +367,7 @@ function CaseStudyPage({ study, theme, setTheme }) {
   return (
     <Shell theme={theme} setTheme={setTheme}>
       <Meta title={`${study.title} Case Study | Abdul Ndeiya`} description={study.summary} />
-      <section className="case-hero"><div className="case-copy"><a className="back-link" href="/work">← All projects</a><span className="kicker">{study.eyebrow}</span><h1>{study.headline}</h1><p>{study.summary}</p></div><Mockup kind={study.kind} image={study.cover} title={study.title} imagePosition={study.coverPosition} /></section>
+      <section className="case-hero"><div className="case-copy"><a className="back-link" href={getHref('/work')}>← All projects</a><span className="kicker">{study.eyebrow}</span><h1>{study.headline}</h1><p>{study.summary}</p></div><Mockup kind={study.kind} image={study.cover} title={study.title} imagePosition={study.coverPosition} /></section>
       <section className={`case-gallery ${study.kind}`} aria-label={`${study.title} product screens`}>
         <div className="case-gallery-heading"><span className="kicker">PRODUCT SCREENS</span><h2>The product in use.</h2></div>
         <div className="case-gallery-grid">
@@ -345,18 +375,59 @@ function CaseStudyPage({ study, theme, setTheme }) {
         </div>
       </section>
       <section className="section case-body"><div className="case-nav"><span>PROJECT OVERVIEW</span><div><a href="#challenge">01 Challenge</a><a href="#solution">02 Solution</a><a href="#outcome">03 Outcome</a></div></div><div className="case-content"><article id="challenge"><span>01 / CHALLENGE</span><h2>A practical problem, not a design exercise.</h2><p>{study.challenge}</p></article><article id="solution"><span>02 / SOLUTION</span><h2>A system shaped around the real workflow.</h2><p>{study.solution}</p></article><article id="outcome"><span>03 / OUTCOME</span><h2>One clear product foundation.</h2><ul>{study.outcomes.map((item) => <li key={item}><Check />{item}</li>)}</ul></article><article><span>TECHNOLOGY</span><div className="stack-cloud">{study.stack.map((item) => <span key={item}>{item}</span>)}</div></article></div></section>
-      <section className="next-project"><span>NEXT PROJECT</span><h2>{study.kind === 'tracost' ? 'AnnaPro' : 'Kingates Automotive'}</h2><a className="primary-btn" href={study.kind === 'tracost' ? '/work/annapro' : 'https://kingates.com'}>Explore project <ArrowRight size={18} /></a></section>
+      <section className="next-project"><span>NEXT PROJECT</span><h2>{study.kind === 'tracost' ? 'AnnaPro' : 'Kingates Automotive'}</h2><a className="primary-btn" href={study.kind === 'tracost' ? getHref('/work/annapro') : 'https://kingates.com'}>Explore project <ArrowRight size={18} /></a></section>
     </Shell>
   )
 }
 
 function NotFound({ theme, setTheme }) {
-  return <Shell theme={theme} setTheme={setTheme}><section className="not-found"><Braces /><span>404</span><h1>That page isn’t here.</h1><a className="primary-btn" href="/">Return home <ArrowRight /></a></section></Shell>
+  return <Shell theme={theme} setTheme={setTheme}><section className="not-found"><Braces /><span>404</span><h1>That page isn’t here.</h1><a className="primary-btn" href={getHref('/')}>Return home <ArrowRight /></a></section></Shell>
 }
 
 function App() {
   const [theme, setTheme] = useTheme()
-  const path = window.location.pathname.replace(/\/+$/, '') || '/'
+  const [locationPath, setLocationPath] = useState(() => window.location.pathname)
+
+  useEffect(() => {
+    const onLocationChange = () => setLocationPath(window.location.pathname)
+    window.addEventListener('popstate', onLocationChange)
+    return () => window.removeEventListener('popstate', onLocationChange)
+  }, [])
+
+  useEffect(() => {
+    const handleLinkClick = (event) => {
+      const anchor = event.target.closest('a')
+      if (!anchor) return
+
+      const href = anchor.getAttribute('href')
+      if (!href) return
+
+      if (
+        href.startsWith('http://') ||
+        href.startsWith('https://') ||
+        href.startsWith('mailto:') ||
+        href.startsWith('tel:') ||
+        href.startsWith('#') ||
+        anchor.target === '_blank' ||
+        event.ctrlKey ||
+        event.metaKey ||
+        event.shiftKey ||
+        event.altKey
+      ) {
+        return
+      }
+
+      event.preventDefault()
+      window.history.pushState(null, '', href)
+      setLocationPath(window.location.pathname)
+      window.scrollTo(0, 0)
+    }
+
+    document.addEventListener('click', handleLinkClick)
+    return () => document.removeEventListener('click', handleLinkClick)
+  }, [])
+
+  const path = normalizePath(locationPath)
   if (path === '/') return <HomePage theme={theme} setTheme={setTheme} />
   if (path === '/work') return <WorkPage theme={theme} setTheme={setTheme} />
   if (path === '/services') return <ServicesPage theme={theme} setTheme={setTheme} />

@@ -6,7 +6,8 @@
     <title>Opening page…</title>
     <script>
       sessionStorage.setItem('portfolio-path', location.pathname + location.search + location.hash)
-      location.replace('/')
+      var isSubpath = location.pathname.startsWith('/portfolio')
+      location.replace(isSubpath ? '/portfolio/' : '/')
     </script>
   </head>
   <body></body>
